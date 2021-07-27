@@ -45,8 +45,9 @@ def form_edit_get(person_id):
 def form_update_post(person_id):
     cursor = mysql.get_db().cursor()
     inputData = (request.form.get('first_name'), request.form.get('last_name'), request.form.get('company_name'),
-                 request.form.get('company_name'), request.form.get('address'), request.form.get('phone'), person_id)
-    sql_update_query = """UPDATE details SET first_name = %s, last_name = %s, company_name = %s, address = %s, phone = %s WHERE id = %s """
+                 request.form.get('address'), request.form.get('phone'), person_id)
+    sql_update_query = """UPDATE details d SET d.first_name = %s, d.last_name = %s, d.company_name = %s, d.address = %s, 
+                        d.phone = %s WHERE d.id = %s """
     cursor.execute(sql_update_query, inputData)
     mysql.get_db().commit()
     return redirect("/", code=302)
